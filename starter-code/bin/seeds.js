@@ -23,6 +23,7 @@ const celebrities = [
 }
 ]
 
+
 Celebrity.create(celebrities, (err) => {
     if (err) { throw (err) }
     console.log(`Created ${celebrities.length} celebrities`)
