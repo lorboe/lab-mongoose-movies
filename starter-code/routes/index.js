@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const Celebrity = require('../models/celebrity');
+const Movie = require('../models/movie');
 
 
 /* GET home page */
@@ -18,8 +19,7 @@ router.get('/celebrities',  (req, res, next) => {
       listOfCelebs: celebsFromDb
     } )
   })
-
-  .catch ((err => {
+  .catch ((error => {
     next(error)
   }))
   })
@@ -76,5 +76,47 @@ Celebrity.findByIdAndRemove(req.params.id)
 })
 
 
+router.get('/celebrities/:id/edit' , (req, res, next) => {
+Celebrity.findById(req.params.id)
+.then (celebsFromDb => {
+  res.render ('/celebrities/edit-celebrity', {
+    celebrity: celebsFromDb
+  })
+})
+.catch ((error) => {
+  next(error)
+})
+})
+
+
+router.post('/celebrities/:id/edit' , (req, res, next) => {
+Celebrity.findByIdAndUpdate(req.params.id, {
+name: req.body.name,
+occupation: req.body.occupation,
+catchPhrase: req.body.catchPhrase,
+})
+.then(celebrity =>{
+  res.redirect("/celebrities")
+})
+.catch((error)=>{
+  next(error)
+})
+})
+
+//Movies
+
+router.get('/movies',  (req, res, next) => {
+  Movie.find()
+  .then (moviesFromDb => {
+    console.log("DEBUG", moviesFromDb)
+    res.render('movies', {
+      listOfMovies: moviesFromDb
+    } )
+  })
+
+  .catch ((error => {
+    next(error)
+  }))
+  })
 
 module.exports = router;

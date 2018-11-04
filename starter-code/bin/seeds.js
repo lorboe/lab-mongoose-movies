@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Celebrity = require('../models/celebrity');
-// const Publisher = require ('../models/publisher');
+const Movie = require('../models/movie');
 
 const dbName = 'movies-and-celebs';
 mongoose.connect(`mongodb://localhost/${dbName}`);
@@ -17,9 +17,9 @@ const celebrities = [
   catchPhrase: "I may sound to you like a really hard man - I am not ashamed of it at all. I'm not hard, I'm honest.",
 },
 {
-  name: "Melissa McCarthy",
+  name: "Kate Winslet",
   occupation: 'Actress',
-  catchPhrase: "I'm certainly not shy, but I like playing it because I love those characters that are incredibly confident but really still a mess."
+  catchPhrase: "Live and let die"
 }
 ]
 
@@ -27,5 +27,31 @@ const celebrities = [
 Celebrity.create(celebrities, (err) => {
     if (err) { throw (err) }
     console.log(`Created ${celebrities.length} celebrities`)
+    mongoose.connection.close()
+  });
+
+
+const movies = [
+{
+  title: "Titanic",
+  genre: "Drama",
+  plot: "A woman falls in love with a man in a cruise. The boat sinks, he dies and she survives.",
+},
+{
+  title: "Silence of the lambs",
+  genre: "Suspense",
+  plot: "Crazy man is obsessed with a woman, eats human flesh and is incredibly smart.",
+},
+{
+  title: "Batman",
+  genre: "Suspense",
+  plot: "Rich man dresses up as in a bat suit and helps his city by fighting crime",
+}
+]
+
+
+  Movie.create(movies, (err) => {
+    if (err) { throw (err) }
+    console.log(`Created ${movies.length} movies`)
     mongoose.connection.close()
   });
