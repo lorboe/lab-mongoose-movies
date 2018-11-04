@@ -25,7 +25,7 @@ router.get('/index-celeb',  (req, res, next) => {
   })
 
 
-  router.get('/celebrities/:id', (req, res, next) => {
+  router.get('/index-celeb/:id', (req, res, next) => {
     let id = req.params.id 
     Celebrity.findById(id)
       .then(celebsFromDb => {
@@ -43,7 +43,6 @@ router.get('/index-celeb',  (req, res, next) => {
   
   })
   
-  //this is not working - form doesnt save to the database.....
   router.post('/index-celeb', (req, res, next) => {
   
    // Create a celebrity in the db with the information from the form
@@ -53,9 +52,7 @@ router.get('/index-celeb',  (req, res, next) => {
       catchPhrase: req.body.catchPhrase,
     })
     .then(celebrity => {
-      celebrity.save(function (err, celebrity) {
-        if (err) {Console.log("AHHHHHHH error")} })
-        res.redirect('/index-celeb' + celebrity._id)
+        res.redirect('/index-celeb/')
       })
       .catch((err) => {
        console.log("there was an error adding your celeb")
@@ -131,6 +128,32 @@ router.get('/movies',  (req, res, next) => {
         next(error)
       })
   });
+
+
+
+  router.get('/new-movie', (req, res, next) => {
+    res.render('new-movie')
+  
+  })
+  
+  router.post('/movies', (req, res, next) => {
+  
+    Movie.create({
+      title: req.body.title,
+      genre: req.body.genre,
+      plot: req.body.plot,
+    })
+    .then(movie => {
+        res.redirect('/movies/')
+      })
+      .catch((err) => {
+       console.log("there was an error adding your movie")
+       res.redirect("new-movie")
+      })
+  })
+  
+
+
 
 
 module.exports = router;
