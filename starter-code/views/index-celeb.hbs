@@ -2,13 +2,13 @@
 <ul>
 {{#each listOfCelebs}}
 <li>
-  <a href="/celebrities/{{this._id}}">
+  <a href="/index-celeb/{{this._id}}">
       {{this.name}}
   </a>
-  <form action="celebrities/{{this._id}}/delete" method="post">
+  <form action="index-celeb/{{this._id}}/delete" method="post">
     <button type="submit">Delete</button>
   </form>
-  <form action="celebrities/{{this._id}}/edit-celebrity" method="post">
+  <form action="index-celeb/{{this._id}}/edit-celebrity" method="post">
   <button type="submit">Edit</button>
   </form>
 </li>
