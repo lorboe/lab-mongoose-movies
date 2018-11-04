@@ -1,0 +1,8 @@
+<h2>Edit movie details</h2>
+
+<form action="/movies/({{this._id}}/" method="post">
+Title: <input value= "{{this.title}}" type="text" name="title"> 
+Genre: <input value= "{{this.genre}}" type="text" name="genre">
+Plot: <input value= "{{this.plot}}" type="text" name="plot">  
+<button type="submit"> Confirm changes </button>
+</form>

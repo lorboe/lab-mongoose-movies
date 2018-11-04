@@ -61,44 +61,38 @@ router.get('/index-celeb',  (req, res, next) => {
   })
   
 
-router.post('/celebrities/:id/delete', (req, res, next) => {
+router.post('/index-celeb/:id/delete', (req, res, next) => {
  // let id = req.params.id
 Celebrity.findByIdAndRemove(req.params.id)
 .then (celebsFromDb => {
-  res.redirect('/celebrities')
+  res.redirect('/index-celeb')
 })
 .catch((error) => {
   next(error)
 })
 })
 
+//editing
+router.get('/index-celeb/:id/edit-celebrity', (req, res, next) => {
+  Celebrity.findById(req.params.id)
+    .then(celebrity => {
+          res.render('edit-celebrity', {celebrity})
+        })
+    })
 
-router.get('/celebrities/:id/edit' , (req, res, next) => {
-Celebrity.findById(req.params.id)
-.then (celebsFromDb => {
-  res.render ('/celebrities/edit-celebrity', {
-    celebrity: celebsFromDb
+
+router.post('/index-celeb/:id/edit-celebrity', (req, res, next) => {
+  
+  Celebrity.findByIdAndUpdate(req.params.id, {
+    name: req.body.name,
+    occupation: req.body.occupation,
+    catchPhrase: req.body.catchPhrase,
   })
-})
-.catch ((error) => {
-  next(error)
-})
+    .then(celebrity => {
+      res.redirect('/index-celeb/' + celebrity._id)
+    })
 })
 
-
-router.post('/celebrities/:id/edit' , (req, res, next) => {
-Celebrity.findByIdAndUpdate(req.params.id, {
-name: req.body.name,
-occupation: req.body.occupation,
-catchPhrase: req.body.catchPhrase,
-})
-.then(celebrity =>{
-  res.redirect("/celebrities")
-})
-.catch((error)=>{
-  next(error)
-})
-})
 
 //Movies
 
@@ -152,8 +146,35 @@ router.get('/movies',  (req, res, next) => {
       })
   })
   
+//NOT WORKING
+  router.post('/movies/:id/delete', (req, res, next) => {
+    // let id = req.params.id
+   Movie.findByIdAndRemove(req.params.id)
+   .then (moviesFromDb => {
+     res.redirect('/movies')
+   })
+   .catch((error) => {
+     next(error)
+   })
+   })
 
+   router.get('/movies/:id/edit-movie', (req, res, next) => {
+    Movie.findById(req.params.id)
+      .then(movie => {
+            res.render('edit-movie', {movie})
+          })
+      })
 
-
+      router.post('/movies/:id/edit-movie', (req, res, next) => {
+  
+        Movie.findByIdAndUpdate(req.params.id, {
+          title: req.body.title,
+          genre: req.body.genre,
+          plot: req.body.plot,
+        })
+          .then(movie => {
+            res.redirect('/movies/' + movie._id)
+          })
+      })
 
 module.exports = router;

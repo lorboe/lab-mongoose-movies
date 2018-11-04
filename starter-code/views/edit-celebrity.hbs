@@ -1,8 +1,8 @@
 <h2>Edit celebrity details</h2>
 
-<form action="/index-celeb/({{this._id}}/edit-celebrity" method="post">
-Name: <input value= "{{this.name}}" type="text" name="name"> 
-Occupation: <input value= "{{this.occupation}}" type="text" name="occupation">
-Catch Phrase: <input value= "{{this.catchPhrase}}" type="text" name="catchPhrase">  
+<form action="/index-celeb/({{celebrity._id}}/" method="post">
+Name: <input value= "{{celebrity.name}}" type="text" name="name"> 
+Occupation: <input value= "{{celebrity.occupation}}" type="text" name="occupation">
+Catch Phrase: <input value= "{{celebrity.catchPhrase}}" type="text" name="catchPhrase">  
 <button type="submit"> Confirm changes </button>
 </form>
