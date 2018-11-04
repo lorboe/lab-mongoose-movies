@@ -3,8 +3,8 @@ const Schema   = mongoose.Schema;
 
 const celebritySchema = new Schema({
   name: String,
-  ocupation: {type: Array, default: '_unknown_'},
-  catchPhrase: {type: String},
+  occupation: {type: String, default: '_unknown_'},
+  catchPhrase: String,
 }, {
   timestamps: {
     createdAt: "created_at",
