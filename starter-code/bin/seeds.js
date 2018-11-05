@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const Celebrity = require('../models/celebrity');
 const Movie = require('../models/movie');
+const celeberityMovie = require('../models/celebrity-movies');
 
 const dbName = 'movies-and-celebs';
 mongoose.connect(`mongodb://localhost/${dbName}`);
+
+
+//CELEBRITIES
 
 const celebrities = [
 {
@@ -24,12 +28,15 @@ const celebrities = [
 ]
 
 
-Celebrity.create(celebrities, (err) => {
-    if (err) { throw (err) }
-    console.log(`Created ${celebrities.length} celebrities`)
-    mongoose.connection.close()
-  });
+// Celebrity.create(celebrities, (err) => {
+//     if (err) { throw (err) }
+//     console.log(`Created ${celebrities.length} celebrities`)
+//     mongoose.connection.close()
+//   });
 
+
+
+//MOVIES
 
 const movies = [
 {
@@ -50,8 +57,12 @@ const movies = [
 ]
 
 
-  Movie.create(movies, (err) => {
-    if (err) { throw (err) }
-    console.log(`Created ${movies.length} movies`)
-    mongoose.connection.close()
-  });
+  // Movie.create(movies, (err) => {
+  //   if (err) { throw (err) }
+  //   console.log(`Created ${movies.length} movies`)
+  //   mongoose.connection.close()
+  // });
+
+
+  //trying to create the linked database
+ 
